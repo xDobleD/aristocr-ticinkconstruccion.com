@@ -1,0 +1,1857 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Aristocratic Ink — Custom Tattoo Studio · Murfreesboro, TN</title>
+<meta name="description" content="Aristocratic Ink is a private custom tattoo studio in Murfreesboro, Tennessee. Fine line, realism, blackwork, geometry and traditional, by appointment only." />
+<meta name="theme-color" content="#0F0F0F" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Aristocratic Ink — Made to Remain." />
+<meta property="og:description" content="Premium custom tattoos in Murfreesboro, Tennessee. By appointment." />
+<meta property="og:image" content="assets/hero-aristocrat.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Aristocratic Ink" />
+<meta name="twitter:description" content="Custom tattoo studio in Murfreesboro, Tennessee. By appointment." />
+<meta name="twitter:image" content="assets/hero-aristocrat.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"TattooParlor",
+  "name":"Aristocratic Ink",
+  "image":"assets/hero-aristocrat.png",
+  "telephone":"+1-615-930-9815",
+  "email":"hello@aristocratic.ink",
+  "priceRange":"$$$",
+  "address":{"@type":"PostalAddress","streetAddress":"117 E Main St","addressLocality":"Murfreesboro","addressRegion":"TN","postalCode":"37130","addressCountry":"US"},
+  "openingHoursSpecification":[
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday"],"opens":"11:00","closes":"20:00"},
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Saturday"],"opens":"12:00","closes":"18:00"}
+  ],
+  "url":"https://aristocratic.ink"
+}
+</script>
+<style>
+/* ---------- Tokens ---------- */
+:root{
+  /* Brand palette: Negro · Pantone 305 C · Pantone Cool Gray 3 C */
+  --paper:#C8C9C7;          /* Pantone Cool Gray 3 C — base canvas */
+  --paper-2:#1E1E1E;        /* charcoal — GRAY sections, closer to black for cyan pop */
+  --paper-3:#2A2A2A;        /* card surface on dark sections */
+  --ink:#0F0F0F;
+  --dark:#1A1A1A;
+  --cyan:#59CBE8;            /* Pantone 305 C */
+  --gray:#C8C9C7;            /* Pantone Cool Gray 3 C */
+  --muted:rgba(15,15,15,.55); /* readable meta on light bg */
+  --line:rgba(15,15,15,.12);
+  --line-strong:rgba(15,15,15,.85);
+  --max:1440px;
+  --pad: clamp(20px, 4vw, 56px);
+  --font-display: "Fraunces", "Times New Roman", serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+body{
+  font-family: var(--font-body);
+  font-weight:400;
+  font-size:16px;
+  line-height:1.7;
+  color:var(--ink);
+  background:var(--paper);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+img,video,svg{ display:block; max-width:100%; }
+button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; }
+a{ color:inherit; text-decoration:none; }
+input,select,textarea{ font:inherit; color:inherit; }
+::selection{ background:var(--cyan); color:var(--ink); }
+
+:focus-visible{ outline:2px solid var(--cyan); outline-offset:2px; border-radius:2px; }
+
+/* ---------- Type ---------- */
+h1,h2,h3,h4{ margin:0; font-family:var(--font-display); font-weight:700; font-style:normal; letter-spacing:-0.015em; font-variation-settings:"opsz" 144; }
+h1{ font-size:clamp(3.5rem, 9vw, 8rem); line-height:.92; letter-spacing:-0.035em; }
+h2{ font-size:clamp(2.4rem, 5vw, 4.5rem); line-height:1; letter-spacing:-0.025em; }
+h3{ font-size:clamp(1.6rem, 2.4vw, 2.2rem); line-height:1.05; letter-spacing:-0.015em; }
+p{ margin:0 0 1em; }
+.eyebrow{ font-family:var(--font-mono); font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink); font-weight:500; }
+.mono{ font-family:var(--font-mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--gray); }
+.italic{ font-style:italic; font-weight:400; }
+
+/* ---------- Skip ---------- */
+.skip{ position:absolute; left:8px; top:-40px; padding:8px 14px; background:var(--ink); color:var(--paper); z-index:1000; border-radius:999px; font-size:13px; }
+.skip:focus{ top:8px; }
+
+/* ---------- Grain ---------- */
+.grain{ position:fixed; inset:0; z-index:200; pointer-events:none; opacity:.045; mix-blend-mode:multiply; }
+
+/* ---------- Container ---------- */
+.wrap{ width:100%; max-width:var(--max); margin:0 auto; padding-inline:var(--pad); }
+
+/* ---------- NAV ---------- */
+.nav{
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  padding:18px var(--pad);
+  display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:24px;
+  transition: backdrop-filter .3s ease, background .3s ease, border-color .3s ease;
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  background:rgba(200,201,199,.82);
+  backdrop-filter:saturate(160%) blur(14px);
+  -webkit-backdrop-filter:saturate(160%) blur(14px);
+  border-bottom-color:var(--line);
+}
+.brand{ display:flex; align-items:center; gap:12px; }
+.brand-logo{ display:block; height:36px; width:auto; }
+.foot-brand .brand-logo{ height:40px; }
+.monogram{
+  width:44px; height:44px; display:grid; place-items:center; position:relative;
+  background: transparent; overflow:visible;
+}
+.monogram img{ width:100%; height:100%; object-fit:contain; display:block; transform:scale(1.55); transform-origin:center; }
+.wordmark{ font-family:var(--font-display); font-weight:600; font-size:19px; letter-spacing:-0.02em; color:var(--ink); }
+.wordmark em{ font-style:italic; font-weight:500; color:var(--cyan); }
+
+.nav-pill{
+  justify-self:center;
+  display:flex; align-items:center; gap:2px;
+  background:var(--ink); color:var(--paper);
+  padding:6px; border-radius:999px;
+  box-shadow: 0 1px 0 rgba(255,255,255,.06) inset, 0 8px 24px rgba(15,15,15,.18);
+}
+.nav-pill a{
+  padding:9px 16px; border-radius:999px; font-size:13px; font-weight:500; letter-spacing:.02em;
+  color:#cfcecb; transition:color .2s ease, background .25s ease;
+  position:relative;
+}
+.nav-pill a:hover{ color:var(--paper); }
+.nav-pill .dot{ width:3px; height:3px; background:#3a3a3a; border-radius:50%; }
+
+.nav-cta{
+  justify-self:end;
+  display:inline-flex; align-items:center; gap:10px;
+  background:var(--ink); color:var(--paper);
+  padding:11px 18px 11px 14px; border-radius:999px;
+  font-size:13px; font-weight:500; letter-spacing:.01em;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.nav-cta:hover{ transform:translateY(-1px); box-shadow:0 12px 28px rgba(15,15,15,.25); }
+.nav-cta .live{
+  width:8px; height:8px; border-radius:50%; background:var(--cyan); position:relative;
+  box-shadow:0 0 0 0 rgba(0,200,224,.6);
+  animation: pulse 1.8s ease-out infinite;
+}
+@keyframes pulse{
+  0%{ box-shadow:0 0 0 0 rgba(0,200,224,.55); }
+  70%{ box-shadow:0 0 0 10px rgba(0,200,224,0); }
+  100%{ box-shadow:0 0 0 0 rgba(0,200,224,0); }
+}
+.nav-cta svg{ width:14px; height:14px; }
+
+.burger{ display:none; justify-self:end; width:42px; height:42px; border-radius:50%; background:var(--ink); color:var(--paper); align-items:center; justify-content:center; }
+.burger svg{ width:18px; height:18px; }
+
+/* Mobile menu overlay */
+.menu{
+  position:fixed; inset:0; background:var(--ink); color:var(--paper); z-index:150;
+  transform:translateY(-100%); transition:transform .5s cubic-bezier(.7,0,.2,1);
+  display:flex; flex-direction:column; padding: 80px var(--pad) 40px;
+}
+.menu.open{ transform:translateY(0); }
+.menu .close{ position:absolute; top:22px; right:var(--pad); width:42px; height:42px; border:1px solid #2a2a2a; border-radius:50%; color:var(--paper); display:grid; place-items:center; }
+.menu ul{ list-style:none; padding:0; margin:auto 0; display:flex; flex-direction:column; gap:8px; }
+.menu li a{ font-family:var(--font-display); font-size:48px; line-height:1; letter-spacing:-0.02em; }
+.menu li a em{ color:var(--cyan); font-style:italic; }
+.menu .meta{ display:flex; justify-content:space-between; color:var(--gray); font-family:var(--font-mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; }
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative; min-height:100vh; min-height:100svh; overflow:hidden;
+  background:#0a0a0a;
+  padding-top:90px; padding-bottom:0;
+  isolation:isolate;
+  color: var(--paper);
+}
+.hero-bg{
+  position:absolute; inset:0; z-index:0;
+}
+.hero-img{
+  width:100%; height:100%; object-fit:cover;
+  object-position: 62% center;
+  display:block;
+  filter: contrast(1.04) saturate(1.02);
+}
+.hero-overlay{
+  position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:
+    linear-gradient(to right,
+      rgba(8,8,8,.92) 0%,
+      rgba(8,8,8,.78) 18%,
+      rgba(8,8,8,.48) 34%,
+      rgba(8,8,8,.18) 48%,
+      rgba(8,8,8,0) 62%),
+    linear-gradient(to top,
+      rgba(8,8,8,.7) 0%,
+      rgba(8,8,8,.15) 30%,
+      rgba(8,8,8,0) 55%);
+}
+.hero-vignette{
+  position:absolute; inset:0; z-index:2; pointer-events:none;
+  box-shadow: inset 0 0 200px 40px rgba(0,0,0,.45);
+}
+.hero-cyan-glow{
+  position:absolute; z-index:2; pointer-events:none;
+  width: 480px; height: 480px;
+  right: 16%; top: 38%;
+  background: radial-gradient(circle, rgba(89,203,232,.10), transparent 60%);
+  mix-blend-mode: screen;
+}
+
+.hero-content{
+  position:relative; z-index:10;
+  display:grid; grid-template-columns: 1.05fr 1fr;
+  align-items:end;
+  min-height: calc(100vh - 90px);
+  min-height: calc(100svh - 90px);
+  gap: 24px;
+  padding-bottom: 130px;
+}
+.hero-left{ max-width: 600px; align-self:end; padding-bottom: 12px; }
+.hero-left .eyebrow{ display:flex; align-items:center; gap:10px; margin-bottom:26px; color: var(--paper); }
+.hero-left .eyebrow::before{ content:""; width:32px; height:1px; background:var(--cyan); display:inline-block; }
+.hero-left h1{ margin-bottom: 28px; color: var(--paper); text-shadow: 0 2px 24px rgba(0,0,0,.45); }
+.hero-left h1 em{ font-style:italic; color: var(--cyan); }
+.hero-sub{ font-size: clamp(15px, 1.2vw, 17px); color: rgba(238,236,228,.86); max-width: 480px; line-height:1.65; margin-bottom: 38px; text-shadow: 0 1px 12px rgba(0,0,0,.5); }
+.hero-cta-row{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+.btn{ display:inline-flex; align-items:center; gap:10px; padding:14px 22px; border-radius:999px; font-size:14px; font-weight:500; letter-spacing:.01em; transition:transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease; }
+.btn-primary{ background:var(--cyan); color:var(--ink); box-shadow: 0 12px 30px -10px rgba(0,200,224,.55); }
+.btn-primary:hover{ transform:translateY(-1px); box-shadow: 0 16px 40px -10px rgba(0,200,224,.7); }
+.btn-ghost{ color:var(--ink); padding-left:6px; padding-right:6px; }
+.btn-ghost:hover{ color:var(--cyan); }
+.hero .btn-ghost{ color: var(--paper); }
+.hero .btn-ghost:hover{ color: var(--cyan); }
+.btn svg{ width:14px; height:14px; }
+
+.hero-right{ align-self:end; display:flex; justify-content:flex-end; padding-bottom: 12px; }
+.scroll-ind{ display:flex; flex-direction:column; align-items:flex-end; gap:14px; }
+.scroll-ind .mono{ color:var(--paper); opacity:.6; }
+.scroll-line{ width:1px; height:90px; background:linear-gradient(to bottom, var(--paper) 0%, var(--paper) 30%, transparent 100%); position:relative; }
+.scroll-line::after{
+  content:""; position:absolute; top:0; left:-3px; width:7px; height:18px; background:var(--cyan);
+  animation: drop 2.4s cubic-bezier(.6,0,.4,1) infinite;
+  border-radius:1px;
+}
+@keyframes drop{
+  0%{ transform:translateY(-12px); opacity:0; }
+  20%{ opacity:1; }
+  100%{ transform:translateY(90px); opacity:0; }
+}
+
+/* Marquee */
+.marquee{
+  position:absolute; left:0; right:0; bottom:0; z-index:10;
+  border-top:1px solid rgba(255,255,255,.08); background:rgba(8,8,8,.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  overflow:hidden; padding:18px 0;
+}
+.marquee-track{ display:flex; gap:48px; white-space:nowrap; animation:marq 38s linear infinite; padding-left:48px; }
+.marquee span{ font-family:var(--font-display); font-style:italic; font-weight:500; font-size: clamp(20px, 2.4vw, 30px); color:var(--paper); }
+.marquee .sep{ font-style:normal; color:var(--cyan); font-size: 22px; }
+@keyframes marq{ to{ transform:translateX(-50%); } }
+
+/* ---------- SECTION FRAME ---------- */
+section{ position:relative; }
+.section-pad{ padding: clamp(80px, 12vw, 160px) 0; }
+.section-head{ display:flex; align-items:baseline; gap:12px; margin-bottom: clamp(40px,5vw,72px); }
+.section-head .num{ font-family:var(--font-mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--gray); }
+.section-head .label{ font-family:var(--font-mono); font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink); }
+.section-head .rule{ flex:1; height:1px; background:var(--line); align-self:center; }
+
+/* ---------- PROBLEM ---------- */
+.problem{ padding: clamp(80px,12vw,160px) 0; border-top:1px solid var(--line); }
+.problem-grid{ display:grid; grid-template-columns: 1.4fr 1px 1fr; gap: clamp(40px, 6vw, 96px); align-items:start; }
+.problem .quote-mark{ font-family:var(--font-display); font-style:italic; font-size:120px; line-height:.6; color:var(--cyan); display:block; height:60px; margin-bottom:24px; }
+.problem h2{ font-weight:500; }
+.problem h2 em{ font-style:italic; color:#3a3a3a; }
+.problem .divider{ background:linear-gradient(to bottom, transparent, var(--cyan) 20%, var(--cyan) 80%, transparent); width:1px; height:100%; min-height:280px; }
+.problem-body p{ color:#2a2a2a; font-size:17px; line-height:1.7; }
+.problem-body p + p{ margin-top:1em; }
+.problem-body .sign{ margin-top:36px; display:flex; flex-direction:column; gap:4px; }
+.problem-body .sign-name{ font-family:var(--font-display); font-weight:600; font-style:italic; font-size:18px; }
+
+/* ---------- SOLUTION ---------- */
+.solution{ padding: clamp(80px,12vw,160px) 0; border-top:1px solid var(--line); }
+.solution-intro{ max-width: 720px; margin-bottom: clamp(60px, 7vw, 100px); }
+.solution-intro .eyebrow{ margin-bottom:18px; }
+.solution-intro h2{ font-weight:600; }
+.solution-intro h2 em{ font-style:italic; color:#3a3a3a; }
+.solution-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:1px; background:var(--line); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.solution-grid > article{ background:var(--paper-3); padding: 48px 32px; position:relative; transition: background .35s ease; }
+.solution-grid > article::before{
+  content:""; position:absolute; top:0; left:0; width:0; height:2px; background:var(--cyan); transition:width .8s cubic-bezier(.2,.8,.2,1);
+}
+.solution-grid > article.in::before{ width:100%; }
+.solution-grid > article:hover{ background:#E0E1DF; }
+.solution-grid .num{ font-family:var(--font-mono); font-size:12px; color:var(--cyan); letter-spacing:.2em; margin-bottom:28px; display:block; }
+.solution-grid h3{ font-weight:600; margin-bottom:14px; }
+.solution-grid p{ color:#3a3a3a; font-size:15px; line-height:1.65; margin:0; }
+
+/* ---------- ARTISTS ---------- */
+.artists{ padding: clamp(80px,12vw,160px) 0; border-top:1px solid var(--line); }
+.artists-head{ display:flex; align-items:end; justify-content:space-between; gap:32px; margin-bottom: clamp(40px,5vw,72px); flex-wrap:wrap; }
+.artists-head h2{ max-width:720px; }
+.artists-head h2 em{ font-style:italic; }
+.artists-head p{ max-width:340px; color:#3a3a3a; margin:0; font-size:15px; }
+.artists-grid{
+  display:grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap:1px; background:var(--ink);
+  border:1px solid var(--ink);
+}
+.artist{ grid-column: span 3; }
+.artist:nth-child(n+5){ grid-column: span 4; }
+.artist:nth-child(1){ grid-column: span 3; }
+.artist{ position:relative; background:var(--paper); aspect-ratio: 3/4; overflow:hidden; isolation:isolate; }
+.artist .portrait{
+  position:absolute; inset:0;
+  background-position:center; background-size:cover;
+  filter:saturate(.7) contrast(1.05);
+  transition: transform .9s cubic-bezier(.2,.8,.2,1), filter .5s ease;
+}
+.artist:hover .portrait{ transform:scale(1.04); filter:saturate(1) contrast(1.08); }
+.artist .scrim{ position:absolute; inset:0; background:linear-gradient(to top, rgba(15,15,15,.85) 0%, rgba(15,15,15,.0) 55%); z-index:1; }
+.artist .meta{ position:absolute; left:0; right:0; bottom:0; z-index:2; padding:22px 22px 20px; color:var(--paper); }
+.artist .code{ font-family:var(--font-mono); font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:rgba(245,244,239,.7); margin-bottom:10px; display:flex; gap:10px; align-items:center; }
+.artist .code .dot{ width:3px; height:3px; background:var(--cyan); border-radius:50%; }
+.artist .name{ font-family:var(--font-display); font-weight:600; font-size:26px; letter-spacing:-0.01em; line-height:1; }
+.artist .style{ display:inline-block; margin-top:10px; font-family:var(--font-mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--cyan); }
+.artist .bio{
+  position:absolute; left:0; right:0; bottom:0; z-index:3;
+  background:rgba(15,15,15,.94); color:var(--paper); padding:24px 22px;
+  transform:translateY(100%); transition:transform .5s cubic-bezier(.2,.8,.2,1);
+}
+.artist:hover .bio{ transform:translateY(0); }
+.artist .bio p{ font-size:13px; line-height:1.55; color:#C8C9C7; margin:0 0 14px; }
+.artist .bio a{
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:var(--font-mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--cyan);
+}
+.artist .bio a::after{ content:"→"; }
+
+/* portrait placeholder palettes */
+.portrait{ background-color:#1c1f22; }
+.p1{ background:linear-gradient(140deg,#2a2d30 0%, #14171a 100%); }
+.p2{ background:linear-gradient(140deg,#2e3236 0%, #14171a 100%); }
+.p3{ background:linear-gradient(140deg,#2a2d30 0%, #14171a 100%); }
+.p4{ background:linear-gradient(140deg,#2a3338 0%, #0f1517 100%); }
+.p5{ background:linear-gradient(140deg,#2c2e30 0%, #13161a 100%); }
+.p6{ background:linear-gradient(140deg,#26292c 0%, #101316 100%); }
+.p7{ background:linear-gradient(140deg,#2a2f33 0%, #121518 100%); }
+.portrait-svg{ position:absolute; inset:0; opacity:.7; }
+
+/* ---------- PORTFOLIO ---------- */
+.portfolio{ padding: clamp(80px,12vw,160px) 0; border-top:1px solid var(--line); }
+.portfolio-head{ display:flex; align-items:end; justify-content:space-between; gap:32px; margin-bottom: 40px; flex-wrap:wrap; }
+.portfolio-head h2 em{ font-style:italic; }
+.filters{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom: 32px; }
+.chip{
+  display:inline-flex; align-items:center; gap:8px;
+  border:1px solid var(--line-strong); padding:8px 16px; border-radius:999px;
+  font-size:12px; font-weight:500; letter-spacing:.04em;
+  background:transparent; color:var(--ink);
+  transition: background .25s ease, color .25s ease, border-color .25s ease;
+}
+.chip .ct{ font-family:var(--font-mono); font-size:10px; color:var(--gray); }
+.chip:hover{ background:var(--ink); color:var(--paper); }
+.chip:hover .ct{ color:#7a7773; }
+.chip[aria-pressed="true"]{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
+.chip[aria-pressed="true"] .ct{ color:var(--cyan); }
+
+.mosaic{
+  display:grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: 120px;
+  gap: 8px;
+}
+.tile{
+  position:relative; overflow:hidden; background:#14171a;
+  transition: opacity .4s ease, transform .4s ease;
+}
+.tile.hidden{ display:none; }
+.tile .img{ position:absolute; inset:0; transition: transform .9s cubic-bezier(.2,.8,.2,1); }
+.tile:hover .img{ transform:scale(1.05); }
+.tile .overlay{
+  position:absolute; inset:0; z-index:2;
+  background: linear-gradient(to top, rgba(0,200,224,.86), rgba(0,200,224,0) 60%);
+  opacity:0; transition:opacity .35s ease;
+  display:flex; align-items:flex-end; padding:18px; color:var(--ink);
+}
+.tile:hover .overlay{ opacity:1; }
+.tile .overlay .meta-row{ display:flex; flex-direction:column; gap:4px; }
+.tile .overlay .a{ font-family:var(--font-display); font-weight:600; font-size:18px; line-height:1; }
+.tile .overlay .b{ font-family:var(--font-mono); font-size:10px; letter-spacing:.2em; text-transform:uppercase; }
+
+/* mosaic placements (12-col) */
+.tile.lg{ grid-column: span 6; grid-row: span 4; }
+.tile.md{ grid-column: span 3; grid-row: span 2; }
+.tile.sm{ grid-column: span 3; grid-row: span 2; }
+.tile.tall{ grid-column: span 3; grid-row: span 4; }
+.tile.wide{ grid-column: span 6; grid-row: span 2; }
+
+/* tile color variants */
+.t-a{ background:linear-gradient(150deg,#1a1d20,#0a0c0e); }
+.t-b{ background:linear-gradient(150deg,#1c2024,#0b0d0f); }
+.t-c{ background:linear-gradient(150deg,#1f2326,#0c0e10); }
+.t-d{ background:linear-gradient(150deg,#22262a,#0c0e10); }
+.t-e{ background:linear-gradient(150deg,#20242a,#0c0e10); }
+.t-f{ background:linear-gradient(150deg,#181a1c,#0a0c0e); }
+
+.tile .img svg{ width:100%; height:100%; opacity:.55; }
+
+/* ---------- PROCESS ---------- */
+.process{ padding: clamp(80px,12vw,160px) 0; background:var(--paper-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.process h2 em{ font-style:italic; }
+.steps{ display:grid; grid-template-columns:repeat(4, 1fr); gap:0; margin-top: clamp(48px,6vw,80px); position:relative; }
+.steps::before{
+  content:""; position:absolute; top:28px; left:5%; right:5%; height:1px;
+  background:linear-gradient(to right, var(--cyan), var(--cyan));
+  opacity:.5;
+}
+.step{ position:relative; padding: 0 20px; }
+.step .circle{
+  width:56px; height:56px; border-radius:50%; background:var(--paper-3); border:1px solid var(--ink);
+  display:grid; place-items:center; font-family:var(--font-display); font-weight:600; font-size:20px;
+  position:relative; z-index:2;
+  transition: background .3s ease, color .3s ease;
+}
+.step:hover .circle{ background:var(--ink); color:var(--cyan); }
+.step h3{ margin-top:28px; margin-bottom:10px; font-size:24px; font-weight:600; }
+.step p{ font-size:14px; color:#3a3a3a; line-height:1.6; margin:0; max-width:240px; }
+.step .num-mono{ position:absolute; right:20px; top:0; font-family:var(--font-mono); font-size:11px; letter-spacing:.2em; color:var(--gray); }
+
+/* ---------- TESTIMONIALS ---------- */
+.testi{ padding: clamp(80px,12vw,160px) 0; border-top:1px solid var(--line); }
+.testi h2 em{ font-style:italic; }
+.testi-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top: clamp(48px,6vw,80px); }
+.testi-card{ position:relative; padding:36px 30px 30px; border:1px solid var(--line-strong); background:var(--paper-3); }
+.testi-card .qm{
+  position:absolute; top:-10px; right:18px;
+  font-family:var(--font-display); font-style:italic; font-weight:700; font-size:96px; line-height:1; color:var(--cyan);
+}
+.stars{ display:flex; gap:4px; margin-bottom:18px; }
+.stars span{ width:14px; height:14px; display:inline-block;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2l2.95 6.6 7.05.7-5.3 4.9 1.55 7-6.25-3.7-6.25 3.7 1.55-7L2 9.3l7.05-.7z'/></svg>") center/contain no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2l2.95 6.6 7.05.7-5.3 4.9 1.55 7-6.25-3.7-6.25 3.7 1.55-7L2 9.3l7.05-.7z'/></svg>") center/contain no-repeat;
+  background: var(--cyan);
+}
+.quote{ font-family:var(--font-display); font-style:italic; font-weight:500; font-size: clamp(20px, 1.8vw, 24px); line-height:1.35; color:var(--ink); margin:0 0 28px; letter-spacing:-0.01em; }
+.who{ display:flex; align-items:center; gap:12px; }
+.avatar{ width:40px; height:40px; border-radius:50%; background:var(--ink); color:var(--paper); display:grid; place-items:center; font-family:var(--font-mono); font-size:12px; letter-spacing:.05em; }
+.who-meta{ display:flex; flex-direction:column; }
+.who-name{ font-weight:500; font-size:14px; }
+.who-role{ font-family:var(--font-mono); font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--gray); }
+
+/* ---------- PRICING ---------- */
+.pricing{ padding: clamp(80px,12vw,160px) 0; border-top:1px solid var(--line); background:var(--paper-2); }
+.pricing h2 em{ font-style:italic; }
+.tiers{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line-strong); margin-top: clamp(48px,6vw,80px); border:1px solid var(--line-strong); }
+.tier{ background:var(--paper-3); padding:48px 32px 40px; position:relative; display:flex; flex-direction:column; gap:8px; }
+.tier.featured{ background:var(--ink); color:var(--paper); }
+.tier.featured .price{ color:var(--paper); }
+.tier.featured .tname{ color:var(--paper); }
+.tier.featured li{ color:#C8C9C7; }
+.tier.featured .quote-btn{ background:var(--cyan); color:var(--ink); }
+.tier .tag{ position:absolute; top:-1px; left:50%; transform:translate(-50%,-50%); background:var(--cyan); color:var(--ink); font-family:var(--font-mono); font-size:10px; letter-spacing:.22em; text-transform:uppercase; padding:6px 14px; border-radius:999px; font-weight:600; }
+.tier .tname{ font-family:var(--font-display); font-size:28px; font-weight:600; }
+.tier .tdesc{ font-size:13px; color:#666; min-height:38px; margin-bottom: 12px; }
+.tier.featured .tdesc{ color:#C8C9C7; }
+.tier .price{ font-family:var(--font-display); font-size: clamp(48px, 6vw, 72px); font-weight:700; line-height:1; letter-spacing:-0.03em; margin: 18px 0 4px; }
+.tier .price-sub{ font-family:var(--font-mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--gray); margin-bottom:30px; }
+.tier ul{ list-style:none; padding:0; margin: 0 0 36px; display:flex; flex-direction:column; gap:12px; flex:1; }
+.tier li{ display:flex; gap:12px; font-size:14px; color:#1a1a1a; align-items:flex-start; line-height:1.45; }
+.tier li::before{
+  content:""; width:14px; height:14px; border-radius:50%; background:var(--cyan); flex-shrink:0; margin-top:3px;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' d='M5 12.5l4.5 4.5L20 7'/></svg>") center/70% no-repeat, linear-gradient(black,black);
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' d='M5 12.5l4.5 4.5L20 7'/></svg>") center/70% no-repeat;
+}
+.tier.featured li::before{ background:var(--cyan); }
+.quote-btn{
+  display:inline-flex; align-items:center; justify-content:space-between; gap:10px;
+  background:var(--ink); color:var(--paper); padding:14px 20px; border-radius:999px;
+  font-size:13px; font-weight:500; letter-spacing:.02em;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.quote-btn:hover{ transform:translateY(-1px); box-shadow:0 12px 28px rgba(15,15,15,.25); }
+.quote-btn svg{ width:14px; height:14px; }
+
+/* ---------- CONTACT ---------- */
+.contact{ padding: clamp(80px,12vw,160px) 0; border-top:1px solid var(--line); }
+.contact-grid{ display:grid; grid-template-columns: 1fr 1.05fr; gap: clamp(40px,6vw,100px); align-items:start; }
+.contact-left h2 em{ font-style:italic; color:#3a3a3a; }
+.contact-left .lead{ color:#3a3a3a; font-size:16px; margin: 22px 0 40px; max-width:440px; }
+.info-list{ display:flex; flex-direction:column; gap:22px; margin-top:20px; }
+.info{ display:flex; gap:16px; align-items:flex-start; padding-block:14px; border-top:1px solid var(--line); }
+.info:last-child{ border-bottom:1px solid var(--line); }
+.info-ic{ width:36px; height:36px; border-radius:50%; border:1px solid var(--ink); display:grid; place-items:center; flex-shrink:0; }
+.info-ic svg{ width:16px; height:16px; }
+.info-text{ display:flex; flex-direction:column; gap:2px; }
+.info-text .k{ font-family:var(--font-mono); font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--gray); }
+.info-text .v{ font-size:15px; font-weight:500; }
+
+.form-card{
+  position:relative; background:var(--paper-3); border:1px solid var(--line-strong);
+  padding: 44px 36px;
+}
+.form-card .corner{ position:absolute; width:16px; height:16px; border:1.5px solid var(--ink); }
+.form-card .corner.tl{ top:-1px; left:-1px; border-right:0; border-bottom:0; }
+.form-card .corner.tr{ top:-1px; right:-1px; border-left:0; border-bottom:0; }
+.form-card .corner.bl{ bottom:-1px; left:-1px; border-right:0; border-top:0; }
+.form-card .corner.br{ bottom:-1px; right:-1px; border-left:0; border-top:0; }
+.form-card .eyebrow{ margin-bottom:8px; }
+.form-card h3{ font-weight:600; margin-bottom:28px; }
+.form-row{ display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:18px; }
+.field{ display:flex; flex-direction:column; gap:6px; }
+.field label{ font-family:var(--font-mono); font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--gray); }
+.field input, .field select, .field textarea{
+  width:100%; background:transparent; border:0; border-bottom:1px solid var(--line-strong);
+  padding:10px 2px; font-size:15px; color:var(--ink);
+}
+.field textarea{ min-height:96px; resize:vertical; }
+.field input:focus, .field select:focus, .field textarea:focus{ outline:0; border-bottom-color:var(--cyan); }
+.field select{ appearance:none; background-image:linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%); background-position: calc(100% - 14px) 50%, calc(100% - 9px) 50%; background-size:5px 5px,5px 5px; background-repeat:no-repeat; padding-right:24px; cursor:pointer; }
+.consent{ display:flex; gap:10px; align-items:flex-start; margin: 8px 0 20px; }
+.consent input{ margin-top:5px; accent-color: var(--cyan); }
+.consent label{ font-size:12px; color:#3a3a3a; line-height:1.5; font-family:var(--font-body); letter-spacing:0; text-transform:none; }
+.submit-btn{
+  width:100%;
+  display:inline-flex; justify-content:space-between; align-items:center;
+  background:var(--cyan); color:var(--ink); padding:18px 22px; border-radius:999px;
+  font-weight:600; font-size:14px; letter-spacing:.02em;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.submit-btn:hover{ transform:translateY(-1px); box-shadow:0 14px 32px -10px rgba(0,200,224,.7); }
+.submit-btn svg{ width:16px; height:16px; }
+.form-success{ display:none; padding:18px; border:1px dashed var(--cyan); color:var(--ink); font-size:14px; }
+.form-success.show{ display:block; }
+
+/* ---------- FOOTER ---------- */
+footer{ background:var(--ink); color:var(--paper); padding: 80px 0 32px; }
+.foot-grid{ display:grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 48px; }
+.foot-brand .wordmark{ color:var(--paper); }
+.foot-brand .wordmark em{ color:var(--cyan); }
+.foot-brand .monogram{ background:transparent; }
+.foot-brand .monogram img{ filter: brightness(0) invert(1); } /* render icon in paper on dark bg */
+.foot-brand p{ color:var(--gray); font-size:14px; max-width:280px; margin: 22px 0 28px; }
+.socials{ display:flex; gap:10px; }
+.socials a{ width:38px; height:38px; border-radius:50%; border:1px solid #2a2a2a; display:grid; place-items:center; transition:border-color .2s ease, color .2s ease; color:#C8C9C7; }
+.socials a:hover{ border-color:var(--cyan); color:var(--cyan); }
+.socials svg{ width:16px; height:16px; }
+.foot-col h4{ font-family:var(--font-mono); font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--paper); font-weight:500; margin: 0 0 22px; }
+.foot-col ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px; }
+.foot-col li a{ color:#C8C9C7; font-size:14px; transition:color .2s; }
+.foot-col li a:hover{ color:var(--cyan); }
+
+.foot-strip{ margin-top:60px; padding-top:24px; border-top:1px solid #1f1f1f; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+.foot-strip .copy{ font-family:var(--font-mono); font-size:11px; letter-spacing:.16em; color:#6a6a66; text-transform:uppercase; }
+.foot-strip .legal{ display:flex; gap:24px; }
+.foot-strip .legal a{ font-family:var(--font-mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#6a6a66; }
+.foot-strip .legal a:hover{ color:var(--cyan); }
+
+/* ---------- Reveal ---------- */
+.reveal{ opacity:0; transform: translateY(30px); transition: opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1); }
+.reveal.in{ opacity:1; transform: translateY(0); }
+.reveal.d1{ transition-delay:.08s; }
+.reveal.d2{ transition-delay:.16s; }
+.reveal.d3{ transition-delay:.24s; }
+.reveal.d4{ transition-delay:.32s; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px){
+  .nav-pill{ display:none; }
+  .artists-grid{ grid-template-columns: repeat(6, 1fr); }
+  .artist, .artist:nth-child(n+5), .artist:nth-child(1){ grid-column: span 2; }
+  .artist:nth-child(7){ grid-column: span 6; aspect-ratio: 16/7; }
+}
+@media (max-width: 900px){
+  .nav-cta{ display:none; }
+  .burger{ display:inline-grid; }
+  .hero{ padding-top: 84px; }
+  .hero-content{ grid-template-columns: 1fr; padding-bottom: 110px; }
+  .hero-right{ display:none; }
+  .hero-img{ object-position: 70% center; }
+  .hero-overlay{ background:
+    linear-gradient(to bottom, rgba(8,8,8,.92) 0%, rgba(8,8,8,.55) 38%, rgba(8,8,8,.35) 62%, rgba(8,8,8,.85) 100%); }
+  .problem-grid{ grid-template-columns: 1fr; gap: 40px; }
+  .problem .divider{ display:none; }
+  .solution-grid{ grid-template-columns: 1fr; }
+  .artists-grid{ grid-template-columns: repeat(4, 1fr); }
+  .artist, .artist:nth-child(n+5), .artist:nth-child(1){ grid-column: span 2; }
+  .artist:nth-child(7){ grid-column: span 4; aspect-ratio: 16/7; }
+  .mosaic{ grid-auto-rows: 90px; }
+  .tile.lg{ grid-column: span 12; grid-row: span 4; }
+  .tile.tall{ grid-column: span 6; grid-row: span 4; }
+  .tile.md{ grid-column: span 6; grid-row: span 2; }
+  .tile.sm{ grid-column: span 6; grid-row: span 2; }
+  .tile.wide{ grid-column: span 12; grid-row: span 2; }
+  .steps{ grid-template-columns: 1fr 1fr; gap: 40px 0; }
+  .steps::before{ display:none; }
+  .testi-grid{ grid-template-columns: 1fr; }
+  .tiers{ grid-template-columns: 1fr; }
+  .contact-grid{ grid-template-columns: 1fr; }
+  .foot-grid{ grid-template-columns: 1fr 1fr; gap:32px; }
+}
+@media (max-width: 520px){
+  .artists-grid{ grid-template-columns: 1fr; }
+  .artist, .artist:nth-child(n+5), .artist:nth-child(1), .artist:nth-child(7){ grid-column: 1 / -1; aspect-ratio: 3/4; }
+  .form-row{ grid-template-columns: 1fr; }
+  .foot-grid{ grid-template-columns: 1fr; }
+  .menu li a{ font-size:36px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; }
+  .marquee-track{ animation:none; }
+}
+
+/* Brand logo inverted while over the dark hero (nav not scrolled) */
+.nav:not(.scrolled) .brand-logo{
+  filter: brightness(0) invert(1);
+  transition: filter .3s ease;
+}
+.nav.scrolled .brand-logo{
+  filter: none;
+  transition: filter .3s ease;
+}
+
+/* ============================================
+   SECTION ALTERNATION (after reorder)
+   Pattern: GRAY · DARK · GRAY · DARK · GRAY · DARK
+   01 portfolio · 02 process · 03 contact · 04 artists
+   05 testi · 06 solution
+   GRAY = charcoal (#1E1E1E)   DARK = black (#0F0F0F)
+   All sections use light text; cyan accents pop on both.
+   ============================================ */
+
+/* Cyan accents on every section header */
+.section-head .num{ color: var(--cyan); }
+.section-head .label{ color: var(--paper); }
+.section-head .rule{ background: rgba(89,203,232,.28); }
+
+/* ---------- GRAY sections (charcoal #1E1E1E) ---------- */
+.portfolio,
+.contact,
+.testi{
+  background: var(--paper-2);
+  color: var(--paper);
+  border-top: 1px solid #0a0a0a;
+  border-bottom: 1px solid #0a0a0a;
+}
+
+/* ---------- DARK sections (black #0F0F0F) ---------- */
+.solution,
+.artists,
+.process{
+  background: var(--ink);
+  color: var(--paper);
+  border-top: 1px solid #1c1c1c;
+  border-bottom: 1px solid #1c1c1c;
+}
+
+/* ===== 01 Portfolio (GRAY) ===== */
+.portfolio-head h2{ color: var(--paper); }
+.portfolio-head h2 em{ color: var(--cyan); font-style: italic; }
+.portfolio .chip{
+  border-color: rgba(255,255,255,.22);
+  color: var(--paper);
+}
+.portfolio .chip .ct{ color: rgba(255,255,255,.4); }
+.portfolio .chip:hover{ background: var(--paper); color: var(--ink); border-color: var(--paper); }
+.portfolio .chip:hover .ct{ color: rgba(15,15,15,.55); }
+.portfolio .chip[aria-pressed="true"]{
+  background: var(--cyan); color: var(--ink); border-color: var(--cyan);
+}
+.portfolio .chip[aria-pressed="true"] .ct{ color: rgba(15,15,15,.6); }
+
+/* ===== 02 Process (DARK) ===== */
+.process h2{ color: var(--paper); }
+.process h2 em{ color: var(--cyan); font-style: italic; }
+.process .step .circle{
+  background: #141414;
+  border-color: rgba(255,255,255,.22);
+  color: var(--paper);
+}
+.process .step:hover .circle{ background: var(--cyan); color: var(--ink); border-color: var(--cyan); }
+.process .step h3{ color: var(--paper); }
+.process .step p{ color: rgba(238,236,228,.7); }
+.process .step .num-mono{ color: rgba(238,236,228,.45); }
+.process .steps::before{ background: rgba(89,203,232,.55); opacity: 1; }
+
+/* ===== 03 Contact (GRAY) ===== */
+.contact-left h2{ color: var(--paper); }
+.contact-left h2 em{ color: var(--cyan); font-style: italic; }
+.contact-left .lead{ color: rgba(238,236,228,.78); }
+.contact .info{ border-top-color: rgba(255,255,255,.10); }
+.contact .info:last-child{ border-bottom-color: rgba(255,255,255,.10); }
+.contact .info-ic{ border-color: rgba(255,255,255,.25); color: var(--paper); }
+.contact .info-text .k{ color: rgba(238,236,228,.55); }
+.contact .info-text .v{ color: var(--paper); }
+.contact .form-card{
+  background: #141414;
+  border-color: #2a2a2a;
+}
+.contact .form-card .corner{ border-color: var(--cyan); }
+.contact .form-card h3{ color: var(--paper); }
+.contact .form-card .eyebrow{ color: rgba(238,236,228,.6); }
+.contact .field label{ color: rgba(238,236,228,.55); }
+.contact .field input,
+.contact .field select,
+.contact .field textarea{
+  color: var(--paper);
+  border-bottom-color: rgba(255,255,255,.18);
+}
+.contact .field select{
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--paper) 50%),
+    linear-gradient(135deg, var(--paper) 50%, transparent 50%);
+  background-position: calc(100% - 14px) 50%, calc(100% - 9px) 50%;
+  background-size:5px 5px,5px 5px;
+  background-repeat:no-repeat;
+}
+.contact .field input::placeholder,
+.contact .field textarea::placeholder{ color: rgba(238,236,228,.3); }
+.contact .field input:focus,
+.contact .field select:focus,
+.contact .field textarea:focus{ border-bottom-color: var(--cyan); }
+.contact .consent label{ color: rgba(238,236,228,.75); }
+.contact .form-success{ color: var(--paper); border-color: var(--cyan); }
+
+/* File upload inside the contact form */
+.contact .field-file > label{ display:block; margin-bottom:8px; color: rgba(238,236,228,.55); font-family:var(--font-mono); font-size:10px; letter-spacing:.22em; text-transform:uppercase; }
+.contact .file-drop{
+  position:relative;
+  border:1px dashed rgba(255,255,255,.18);
+  background: rgba(255,255,255,.02);
+  padding: 14px;
+  display:flex; align-items:center; gap:14px;
+  cursor:pointer;
+  transition: border-color .25s ease, background .25s ease;
+}
+.contact .file-drop:hover{ border-color: var(--cyan); background: rgba(89,203,232,.04); }
+.contact .file-drop input[type="file"]{ position:absolute; inset:0; opacity:0; cursor:pointer; }
+.contact .file-ic{
+  width:32px; height:32px; border:1px solid rgba(255,255,255,.22); border-radius:50%;
+  display:grid; place-items:center; color:var(--cyan); flex-shrink:0;
+}
+.contact .file-ic svg{ width:14px; height:14px; }
+.contact .file-text{ display:flex; flex-direction:column; gap:2px; min-width:0; }
+.contact .file-l1{
+  font-family:var(--font-mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--paper);
+}
+.contact .file-l2{
+  font-size:11px; color:rgba(238,236,228,.5);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+
+/* ===== 04 Artists (DARK) ===== */
+.artists-head h2{ color: var(--paper); }
+.artists-head h2 em{ color: var(--cyan); font-style: italic; }
+.artists-head p{ color: rgba(238,236,228,.72); }
+.artists-grid{
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.10);
+}
+
+/* ===== 05 Testimonials (GRAY) ===== */
+.testi h2{ color: var(--paper); }
+.testi h2 em{ color: var(--cyan); font-style: italic; }
+.testi-card{
+  background: #141414;
+  border-color: #2a2a2a;
+  color: var(--paper);
+}
+.testi-card .qm{ color: var(--cyan); }
+.testi-card .quote{ color: var(--paper); }
+.testi-card .stars span{ background: var(--cyan); }
+.testi-card .who-name{ color: var(--paper); }
+.testi-card .who-role{ color: rgba(238,236,228,.55); }
+.testi-card .avatar{ background: var(--cyan); color: var(--ink); }
+
+/* ===== 06 Solution (DARK) ===== */
+.solution-intro .eyebrow{ color: rgba(238,236,228,.7); }
+.solution-intro h2{ color: var(--paper); }
+.solution-intro h2 em{ color: var(--cyan); font-style: italic; }
+.solution-grid{
+  background: rgba(255,255,255,.06);
+  border-top: 1px solid rgba(255,255,255,.06);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.solution-grid > article{
+  background: #141414;
+  color: var(--paper);
+}
+.solution-grid > article::before{ background: var(--cyan); }
+.solution-grid > article:hover{ background: #1c1c1c; }
+.solution-grid .num{ color: var(--cyan); }
+.solution-grid h3{ color: var(--paper); }
+.solution-grid p{ color: rgba(238,236,228,.72); }
+
+/* ============================================
+   QUICK CONTACT (discreet strip after Our Method)
+   ============================================ */
+.quick-contact{
+  padding: 28px 0 64px;
+  background: var(--ink);
+}
+.qc-strip{
+  position: relative;
+  display:flex; align-items:center; gap:36px;
+  padding: 22px 28px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: #141414;
+}
+.qc-strip::before, .qc-strip::after{
+  content:""; position:absolute; width:12px; height:12px; border:1px solid var(--cyan);
+}
+.qc-strip::before{ top:-1px; left:-1px; border-right:0; border-bottom:0; }
+.qc-strip::after{ bottom:-1px; right:-1px; border-left:0; border-top:0; }
+
+.qc-head{ display:flex; flex-direction:column; gap:6px; flex-shrink:0; min-width: 240px; }
+.qc-eyebrow{
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .26em; text-transform: uppercase;
+  color: var(--cyan);
+}
+.qc-tag{
+  font-family: var(--font-display); font-style: italic; font-size: 14px; line-height:1.35;
+  color: rgba(238,236,228,.8);
+  max-width: 280px;
+}
+.qc-form{
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.6fr auto;
+  gap: 22px;
+  align-items: end;
+}
+.qc-form input{
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(255,255,255,.18);
+  padding: 8px 0;
+  color: var(--paper);
+  font-size: 14px;
+  transition: border-color .25s ease;
+  width: 100%;
+}
+.qc-form input::placeholder{ color: rgba(238,236,228,.36); }
+.qc-form input:focus{ outline: 0; border-bottom-color: var(--cyan); }
+.qc-form button{
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--cyan); color: var(--ink);
+  padding: 10px 18px; border-radius: 999px;
+  font-weight: 600; font-size: 12px; letter-spacing: .04em; text-transform: uppercase;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.qc-form button:hover{ transform: translateY(-1px); box-shadow: 0 10px 24px -10px rgba(89,203,232,.65); }
+.qc-form button:disabled{ opacity:.6; cursor:default; transform: none; box-shadow:none; }
+.qc-form button svg{ width: 13px; height: 13px; }
+
+.qc-success{
+  display: none;
+  position: absolute; left: 28px; right: 28px; bottom: 8px;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--cyan);
+}
+.qc-success.show{ display: block; }
+
+@media (max-width: 1000px){
+  .qc-strip{ flex-direction: column; align-items: stretch; gap: 18px; padding: 24px; }
+  .qc-head{ min-width: 0; }
+  .qc-form{ grid-template-columns: 1fr 1fr; }
+  .qc-form input:nth-child(3){ grid-column: 1 / -1; }
+  .qc-form button{ grid-column: 1 / -1; justify-content: space-between; }
+}
+@media (max-width: 520px){
+  .qc-form{ grid-template-columns: 1fr; }
+}
+
+/* ============================================
+   MAP SECTION (bottom, before footer)
+   ============================================ */
+.map-section{
+  position: relative;
+  background: var(--ink);
+  border-top: 1px solid #1c1c1c;
+  border-bottom: 1px solid #1c1c1c;
+}
+.map-wrap{
+  position: relative;
+  width: 100%;
+  height: 440px;
+  overflow: hidden;
+}
+.map-wrap iframe{
+  width: 100%; height: 100%; display: block; border: 0;
+  filter: invert(.92) hue-rotate(180deg) saturate(.55) brightness(.95) contrast(1.05);
+}
+.map-overlay{
+  position: absolute; left: 0; top: 0; bottom: 0; right: 0;
+  display: flex; align-items: center;
+  padding-left: clamp(20px, 5vw, 80px);
+  pointer-events: none;
+}
+.map-card{
+  pointer-events: auto;
+  background: rgba(15,15,15,.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid #2a2a2a;
+  padding: 28px 32px 26px;
+  max-width: 380px;
+  color: var(--paper);
+  position: relative;
+}
+.map-card::before, .map-card::after{
+  content:""; position:absolute; width:14px; height:14px; border:1.5px solid var(--cyan);
+}
+.map-card::before{ top:-1px; left:-1px; border-right:0; border-bottom:0; }
+.map-card::after{ bottom:-1px; right:-1px; border-left:0; border-top:0; }
+.map-eyebrow{
+  display:inline-flex; align-items:center; gap:8px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--cyan); margin-bottom: 12px;
+}
+.map-eyebrow svg{ width: 14px; height: 14px; }
+.map-card h3{
+  font-family: var(--font-display); font-weight: 600; font-size: 24px;
+  margin: 0 0 10px; color: var(--paper); letter-spacing: -0.015em; line-height:1.1;
+}
+.map-card .map-addr{
+  font-size: 14.5px; line-height: 1.55; color: rgba(238,236,228,.85); margin: 0 0 14px;
+}
+.map-card .map-hours{
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+  color: rgba(238,236,228,.5); margin: 0 0 16px;
+}
+.map-link{
+  display: inline-flex; align-items: center; gap: 10px; width: 100%;
+  justify-content: space-between;
+  color: var(--cyan);
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+  padding-top: 16px; border-top: 1px solid #2a2a2a;
+  transition: color .25s ease;
+}
+.map-link:hover{ color: var(--paper); }
+.map-link svg{ width: 14px; height: 14px; }
+
+@media (max-width: 700px){
+  .map-wrap{ height: 520px; }
+  .map-overlay{ padding-left: 20px; padding-right: 20px; align-items: flex-start; padding-top: 28px; }
+  .map-card{ padding: 22px 22px 20px; }
+}
+
+/* ============================================
+   LOCATION FAB (floating pin with popover)
+   ============================================ */
+.loc-fab{
+  position: fixed; left: 22px; bottom: 22px; z-index: 90;
+}
+.loc-pin{
+  position: relative;
+  width: 50px; height: 50px; border-radius: 50%;
+  background: var(--cyan); color: var(--ink);
+  display: grid; place-items: center;
+  box-shadow: 0 12px 28px -8px rgba(89,203,232,.55);
+  cursor: pointer;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.loc-pin::before{
+  content:""; position:absolute; inset:-3px; border-radius:50%;
+  border:1.5px solid var(--cyan); opacity:0;
+  animation: locPulse 2.4s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes locPulse{
+  0%{ transform:scale(1); opacity:.6; }
+  100%{ transform:scale(1.55); opacity:0; }
+}
+.loc-pin:hover{ transform: translateY(-2px); box-shadow: 0 16px 36px -8px rgba(89,203,232,.75); }
+.loc-pin svg{ width: 22px; height: 22px; }
+
+.loc-pop{
+  position: absolute; bottom: 64px; left: 0;
+  width: 290px;
+  background: #141414;
+  border: 1px solid #2a2a2a;
+  padding: 18px 20px 16px;
+  opacity: 0; transform: translateY(8px) scale(.96);
+  transition: opacity .3s ease, transform .3s ease;
+  pointer-events: none;
+}
+.loc-pop::before, .loc-pop::after{
+  content:""; position:absolute; width:11px; height:11px; border:1.5px solid var(--cyan);
+}
+.loc-pop::before{ top:-1px; left:-1px; border-right:0; border-bottom:0; }
+.loc-pop::after{ bottom:-1px; right:-1px; border-left:0; border-top:0; }
+.loc-fab.open .loc-pop{ opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+
+.loc-pop-head{ display:flex; justify-content:space-between; align-items:center; margin-bottom: 10px; }
+.loc-pop-head .eyebrow{ color: var(--cyan); }
+.loc-pop-close{
+  width: 24px; height: 24px; border-radius: 50%;
+  border: 1px solid #2a2a2a; color: rgba(238,236,228,.55);
+  display:grid; place-items:center;
+  cursor: pointer;
+}
+.loc-pop-close:hover{ color: var(--cyan); border-color: var(--cyan); }
+.loc-pop-close svg{ width: 11px; height: 11px; }
+
+.loc-name{ font-family: var(--font-display); font-weight: 600; font-size: 19px; color: var(--paper); margin-bottom: 6px; letter-spacing: -0.015em; }
+.loc-addr{ font-size: 13.5px; color: rgba(238,236,228,.78); line-height: 1.55; margin-bottom: 8px; }
+.loc-hours{ font-family: var(--font-mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: rgba(238,236,228,.5); margin-bottom: 14px; }
+.loc-link{
+  display: inline-flex; align-items: center; gap: 8px; width: 100%; justify-content: space-between;
+  color: var(--cyan);
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+  padding-top: 12px; border-top: 1px solid #2a2a2a;
+  transition: color .25s ease;
+}
+.loc-link:hover{ color: var(--paper); }
+.loc-link svg{ width: 14px; height: 14px; }
+
+@media (max-width: 520px){
+  .loc-fab{ left: 16px; bottom: 16px; }
+  .loc-pop{ width: 260px; }
+}
+</style>
+
+<style>
+/* ---------- Tweaks Panel ---------- */
+.tweaks-panel{
+  position:fixed; right:20px; bottom:20px; z-index:9999;
+  width: 280px;
+  background: var(--ink);
+  color: var(--paper);
+  border:1px solid #2a2a2a;
+  box-shadow: 0 24px 48px -16px rgba(0,0,0,.45);
+  display:none;
+  font-family: var(--font-body);
+}
+.tweaks-panel.open{ display:block; }
+.tweaks-panel .tp-head{
+  display:flex; justify-content:space-between; align-items:center;
+  padding: 14px 16px;
+  border-bottom: 1px solid #2a2a2a;
+}
+.tweaks-panel .tp-title{
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--paper);
+}
+.tweaks-panel .tp-close{
+  width:26px; height:26px; border-radius:50%;
+  display:grid; place-items:center;
+  border:1px solid #2a2a2a; color:#9a9994;
+  cursor:pointer;
+}
+.tweaks-panel .tp-close:hover{ color:var(--cyan); border-color:var(--cyan); }
+.tweaks-panel .tp-close svg{ width:12px; height:12px; }
+.tweaks-panel .tp-body{ padding: 16px; display:flex; flex-direction:column; gap: 16px; }
+.tweaks-panel .tp-field{ display:flex; flex-direction:column; gap:6px; }
+.tweaks-panel .tp-field label{
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+  color:#9a9994;
+}
+.tweaks-panel .tp-field input{
+  background: #141414;
+  border: 1px solid #2a2a2a;
+  padding: 9px 11px;
+  font-size: 14px;
+  color: var(--paper);
+  font-family: var(--font-body);
+  transition: border-color .25s ease;
+}
+.tweaks-panel .tp-field input:focus{ outline:0; border-color: var(--cyan); }
+.tweaks-panel .tp-hint{
+  font-family: var(--font-mono); font-size: 10px; letter-spacing:.16em; text-transform:uppercase;
+  color: #6a6a66;
+  padding: 0 16px 14px;
+}
+</style>
+
+</head>
+<body style="background-color: rgb(255, 255, 248)">
+
+<template id="__bundler_thumbnail">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <rect width="400" height="400" fill="#0F0F0F"/>
+  <g transform="translate(200 200)">
+    <circle r="120" fill="none" stroke="#59CBE8" stroke-width="2" opacity=".25"/>
+    <circle r="80" fill="none" stroke="#59CBE8" stroke-width="2" opacity=".5"/>
+    <text x="0" y="14" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="72" fill="#C8C9C7" font-style="italic">A</text>
+    <text x="0" y="60" text-anchor="middle" font-family="monospace" font-size="11" letter-spacing="4" fill="#59CBE8">INK</text>
+  </g>
+</svg>
+</template>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- Grain -->
+<svg class="grain" aria-hidden="true"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .4 0"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
+
+<!-- NAV -->
+<header class="nav" id="nav" role="banner">
+  <a class="brand" href="#studio" aria-label="Aristocratic Ink — home">
+    <img class="brand-logo" src="assets/logo-full.png" alt="Aristocratic Ink" />
+  </a>
+  <nav class="nav-pill" aria-label="Primary">
+    <a href="#studio">Studio</a>
+    <a href="#artists">Artists</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a class="nav-cta" href="#contact">
+    <span class="live" aria-hidden="true"></span>
+    Reserve Your Session
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </a>
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+</header>
+
+<!-- Mobile menu -->
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Site menu">
+  <button class="close" id="close-menu" aria-label="Close menu">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <ul>
+    <li><a href="#studio">Studio</a></li>
+    <li><a href="#artists">Artists</a></li>
+    <li><a href="#portfolio"><em>Portfolio</em></a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="meta">
+    <span>117 E Main St · <span data-tweak="city">Murfreesboro</span> TN</span>
+    <span>By Appointment</span>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" id="studio" aria-label="Hero">
+  <div class="hero-bg" aria-hidden="true">
+    <img class="hero-img" src="assets/hero-aristocrat.png" alt="The Aristocrat — a polished chrome statuette of a tattooed gentleman in a top hat, on a marble plinth, inside the studio." />
+  </div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-vignette" aria-hidden="true"></div>
+  <div class="hero-cyan-glow" aria-hidden="true"></div>
+
+  <div class="wrap hero-content">
+    <div class="hero-left">
+      <div class="eyebrow">Aristocratic Ink &nbsp;/&nbsp; Est <span data-tweak="year">2024</span></div>
+      <h1>Made to <em>Remain.</em></h1>
+      <p class="hero-sub">Custom tattoos drawn for one body, one story, one lifetime. No flash sheets. No filler. Seven resident artists working by appointment from a private studio in <span data-tweak="city">Murfreesboro</span>, Tennessee.</p>
+      <div class="hero-cta-row">
+        <a class="btn btn-primary" href="#contact">Reserve Your Session</a>
+        <a class="btn btn-ghost" href="#portfolio">▸ View Portfolio</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="scroll-ind">
+        <span class="mono">Scroll · Read on</span>
+        <div class="scroll-line" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Fine Line</span><span class="sep">✦</span>
+      <span>Realism</span><span class="sep">✦</span>
+      <span>Blackwork</span><span class="sep">✦</span>
+      <span>Geometry</span><span class="sep">✦</span>
+      <span>Neo-Traditional</span><span class="sep">✦</span>
+      <span>Botanical</span><span class="sep">✦</span>
+      <span>Portrait</span><span class="sep">✦</span>
+      <span>Script</span><span class="sep">✦</span>
+      <span>Fine Line</span><span class="sep">✦</span>
+      <span>Realism</span><span class="sep">✦</span>
+      <span>Blackwork</span><span class="sep">✦</span>
+      <span>Geometry</span><span class="sep">✦</span>
+      <span>Neo-Traditional</span><span class="sep">✦</span>
+      <span>Botanical</span><span class="sep">✦</span>
+      <span>Portrait</span><span class="sep">✦</span>
+      <span>Script</span><span class="sep">✦</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="num">01</span>
+      <span class="label">Selected Work</span>
+      <span class="rule"></span>
+    </div>
+    <div class="portfolio-head">
+      <h2 class="reveal">Recent. <em>From the studio.</em></h2>
+    </div>
+    <div class="filters reveal d1" role="tablist" aria-label="Portfolio filters">
+      <button class="chip" data-filter="all" aria-pressed="true">All <span class="ct">14</span></button>
+      <button class="chip" data-filter="realism" aria-pressed="false">Realism <span class="ct">03</span></button>
+      <button class="chip" data-filter="fineline" aria-pressed="false">Fine Line <span class="ct">04</span></button>
+      <button class="chip" data-filter="geometry" aria-pressed="false">Geometry <span class="ct">03</span></button>
+      <button class="chip" data-filter="blackwork" aria-pressed="false">Blackwork <span class="ct">02</span></button>
+      <button class="chip" data-filter="traditional" aria-pressed="false">Traditional <span class="ct">02</span></button>
+    </div>
+
+    <div class="mosaic reveal d2" id="mosaic">
+      <!-- 14 tiles, mixed sizes -->
+      <div class="tile lg t-a" data-cat="realism"><div class="img"><svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice"><circle cx="50" cy="40" r="22" fill="none" stroke="#59CBE8" stroke-width=".3"/><path d="M28 100 Q28 70 50 70 Q72 70 72 100" fill="none" stroke="#59CBE8" stroke-width=".3"/></svg></div><div class="overlay"><div class="meta-row"><span class="a">Lion Sleeve, Half</span><span class="b">Ivy · Realism · 14 hrs</span></div></div></div>
+      <div class="tile tall t-b" data-cat="fineline"><div class="img"><svg viewBox="0 0 100 200" preserveAspectRatio="xMidYMid slice"><path d="M50 20 v160 M40 60 q10 -10 20 0 M40 120 q10 -10 20 0" fill="none" stroke="#59CBE8" stroke-width=".3"/></svg></div><div class="overlay"><div class="meta-row"><span class="a">Spine Script</span><span class="b">Marcellus · Fine Line · 4 hrs</span></div></div></div>
+      <div class="tile md t-c" data-cat="geometry"><div class="img"><svg viewBox="0 0 100 60" preserveAspectRatio="xMidYMid slice"><polygon points="50,8 92,30 50,52 8,30" fill="none" stroke="#59CBE8" stroke-width=".3"/><circle cx="50" cy="30" r="14" fill="none" stroke="#59CBE8" stroke-width=".3"/></svg></div><div class="overlay"><div class="meta-row"><span class="a">Forearm Mandala</span><span class="b">Calder · Geometry · 6 hrs</span></div></div></div>
+      <div class="tile md t-d" data-cat="blackwork"><div class="img"><svg viewBox="0 0 100 60" preserveAspectRatio="xMidYMid slice"><rect x="20" y="10" width="60" height="40" fill="none" stroke="#59CBE8" stroke-width=".3"/><path d="M20 30 h60 M50 10 v40" stroke="#59CBE8" stroke-width=".3"/></svg></div><div class="overlay"><div class="meta-row"><span class="a">Chest Blackout</span><span class="b">Calder · Blackwork · 10 hrs</span></div></div></div>
+      <div class="tile wide t-e" data-cat="traditional"><div class="img"><svg viewBox="0 0 200 60" preserveAspectRatio="xMidYMid slice"><path d="M20 30 q30 -20 60 0 q30 20 60 0 q30 -20 60 0" fill="none" stroke="#59CBE8" stroke-width=".3"/></svg></div><div class="overlay"><div class="meta-row"><span class="a">Swallow Pair, Chest</span><span class="b">Nori · Neo-Traditional · 8 hrs</span></div></div></div>
+      <div class="tile sm t-f" data-cat="fineline"><div class="img"><svg viewBox="0 0 100 60" preserveAspectRatio="xMidYMid slice"><path d="M30 50 q20 -40 40 0" fill="none" stroke="#59CBE8" stroke-width=".3"/></svg></div><div class="overlay"><div class="meta-row"><span class="a">Botanical Wrist</span><span class="b">Marcellus · Fine Line · 2 hrs</span></div></div></div>
+      <div class="tile sm t-a" data-cat="realism"><div class="img"><svg viewBox="0 0 100 60" preserveAspectRatio="xMidYMid slice"><circle cx="50" cy="30" r="14" fill="none" stroke="#59CBE8" stroke-width=".3"/></svg></div><div class="overlay"><div class="meta-row"><span class="a">Eye Study</span><span class="b">Ivy · Realism · 5 hrs</span></div></div></div>
+      <div class="tile sm t-b" data-cat="geometry"><div class="img"><svg viewBox="0 0 100 60" preserveAspectRatio="xMidYMid slice"><polygon points="50,10 88,50 12,50" fill="none" stroke="#59CBE8" stroke-width=".3"/></svg></div><div class="overlay"><div class="meta-row"><span class="a">Triangle Series</span><span class="b">Calder · Geometry · 3 hrs</span></div></div></div>
+      <div class="tile md t-c" data-cat="fineline"><div class="img"><svg viewBox="0 0 100 60" preserveAspectRatio="xMidYMid slice"><path d="M20 30 c10 -20 30 20 40 0 s30 -20 20 10" fill="none" stroke="#59CBE8" stroke-width=".3"/></svg></div><div class="overlay"><div class="meta-row"><span class="a">Cursive Quote</span><span class="b">Marcellus · Fine Line · 3 hrs</span></div></div></div>
+      <div class="tile md t-d" data-cat="realism"><div class="img"><svg viewBox="0 0 100 60" preserveAspectRatio="xMidYMid slice"><path d="M20 50 q20 -40 30 -20 q10 -30 30 20" fill="none" stroke="#59CBE8" stroke-width=".3"/></svg></div><div class="overlay"><div class="meta-row"><span class="a">Mountain Vista</span><span class="b">Ivy · Realism · 9 hrs</span></div></div></div>
+      <div class="tile sm t-e" data-cat="traditional"><div class="img"><svg viewBox="0 0 100 60" preserveAspectRatio="xMidYMid slice"><path d="M50 12 q-18 18 0 36 q18 -18 0 -36" fill="none" stroke="#59CBE8" stroke-width=".3"/></svg></div><div class="overlay"><div class="meta-row"><span class="a">Rose, Calf</span><span class="b">Nori · Traditional · 4 hrs</span></div></div></div>
+      <div class="tile sm t-f" data-cat="blackwork"><div class="img"><svg viewBox="0 0 100 60" preserveAspectRatio="xMidYMid slice"><circle cx="50" cy="30" r="16" fill="none" stroke="#59CBE8" stroke-width=".3"/><circle cx="50" cy="30" r="8" fill="#59CBE8" opacity=".3"/></svg></div><div class="overlay"><div class="meta-row"><span class="a">Eclipse</span><span class="b">Calder · Blackwork · 5 hrs</span></div></div></div>
+      <div class="tile sm t-a" data-cat="geometry"><div class="img"><svg viewBox="0 0 100 60" preserveAspectRatio="xMidYMid slice"><path d="M20 50 l30 -40 l30 40 z M35 40 l15 -20 l15 20" fill="none" stroke="#59CBE8" stroke-width=".3"/></svg></div><div class="overlay"><div class="meta-row"><span class="a">Twin Peaks</span><span class="b">Calder · Geometry · 4 hrs</span></div></div></div>
+      <div class="tile sm t-b" data-cat="fineline"><div class="img"><svg viewBox="0 0 100 60" preserveAspectRatio="xMidYMid slice"><path d="M20 30 h60 M30 20 h40 M30 40 h40" fill="none" stroke="#59CBE8" stroke-width=".3"/></svg></div><div class="overlay"><div class="meta-row"><span class="a">Bar Series</span><span class="b">Theo · Fine Line · 1 hr</span></div></div></div>
+    </div>
+  </div>
+</section>
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="num">02</span>
+      <span class="label">Process</span>
+      <span class="rule"></span>
+    </div>
+    <h2 class="reveal">From idea to ink. <em>Four deliberate stages.</em></h2>
+    <div class="steps">
+      <div class="step reveal d1">
+        <span class="num-mono">Step 01</span>
+        <div class="circle">1</div>
+        <h3>Consultation</h3>
+        <p>A 45-minute conversation. We map references, placement, scale, story. No deposit until you've met your artist.</p>
+      </div>
+      <div class="step reveal d2">
+        <span class="num-mono">Step 02</span>
+        <div class="circle">2</div>
+        <h3>Design</h3>
+        <p>Your artist drafts the piece across two weeks. You see the linework before the needle ever sees you.</p>
+      </div>
+      <div class="step reveal d3">
+        <span class="num-mono">Step 03</span>
+        <div class="circle">3</div>
+        <h3>Session</h3>
+        <p>Private suite. Single artist. Four to eight hours. Breaks when you need them. We work until the work is right.</p>
+      </div>
+      <div class="step reveal d4">
+        <span class="num-mono">Step 04</span>
+        <div class="circle">4</div>
+        <h3>Aftercare</h3>
+        <p>A full aftercare kit goes home with you. We check in at day three, week two, and a healed-photo follow-up at week six.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="num">03</span>
+      <span class="label">Reserve a Session</span>
+      <span class="rule"></span>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-left reveal">
+        <h2>Ready to <em>Get Marked?</em></h2>
+        <p class="lead">Send us a sketch, a sentence, or just a feeling. We'll write back within one business day with next steps and your artist's earliest opening.</p>
+        <div class="info-list">
+          <div class="info">
+            <div class="info-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-7.5-7-12a7 7 0 1 1 14 0c0 4.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+            <div class="info-text"><span class="k">Studio</span><span class="v">117 E Main St · <span data-tweak="city">Murfreesboro</span> TN 37130</span></div>
+          </div>
+          <div class="info">
+            <div class="info-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div class="info-text"><span class="k">Phone</span><span class="v">(615) 930-9815</span></div>
+          </div>
+          <div class="info">
+            <div class="info-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3 7l9 6 9-6"/></svg></div>
+            <div class="info-text"><span class="k">Email</span><span class="v">hello@aristocratic.ink</span></div>
+          </div>
+        </div>
+      </div>
+
+      <form class="form-card reveal d1" id="booking-form" novalidate>
+        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+        <div class="eyebrow">Inquiry</div>
+        <h3>Tell us about the piece.</h3>
+        <div class="form-row">
+          <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" type="text" required placeholder="Your full name" autocomplete="name" /></div>
+          <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" required placeholder="you@example.com" autocomplete="email" /></div>
+        </div>
+        <div class="form-row">
+          <div class="field" style="grid-column: 1 / -1;"><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" placeholder="(615) 930-0000" autocomplete="tel" /></div>
+        </div>
+        <div class="field" style="margin-bottom:18px;"><label for="f-idea">Your Idea</label><textarea id="f-idea" name="idea" placeholder="A sentence or two — references welcome." required></textarea></div>
+                <div class="field field-file" style="margin-bottom:20px;">
+          <label for="f-reference">Reference (optional)</label>
+          <label class="file-drop" for="f-reference">
+            <span class="file-ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            </span>
+            <span class="file-text">
+              <span class="file-l1" id="f-reference-l1">Upload an image or PDF</span>
+              <span class="file-l2" id="f-reference-l2">JPG, PNG or PDF · up to 10 MB</span>
+            </span>
+            <input id="f-reference" name="reference" type="file" accept="image/*,application/pdf" />
+          </label>
+        </div>
+        <div class="consent">
+          <input id="f-consent" name="consent" type="checkbox" required />
+          <label for="f-consent">I'm 18+ and agree to be contacted about my inquiry. We never share your details.</label>
+        </div>
+        <button class="submit-btn" type="submit">
+          Send Inquiry
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <div class="form-success" id="form-success" role="status" aria-live="polite">
+          Thank you. Your inquiry is in. We'll write back within one business day from <strong>hello@aristocratic.ink</strong>.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+<!-- ARTISTS -->
+<section class="artists" id="artists">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="num">04</span>
+      <span class="label">The Roster</span>
+      <span class="rule"></span>
+    </div>
+    <div class="artists-head">
+      <h2 class="reveal">Seven resident artists. <em>One signature each.</em></h2>
+      <p class="reveal d1">Hover any card to read the bio and check booking status. Each artist averages three sessions a week — book early.</p>
+    </div>
+    <div class="artists-grid reveal">
+      <article class="artist">
+        <div class="portrait p1">
+          <svg class="portrait-svg" viewBox="0 0 100 120" preserveAspectRatio="xMidYMid slice"><circle cx="50" cy="42" r="20" fill="none" stroke="#59CBE8" stroke-width=".4" opacity=".5"/><path d="M22 120 Q22 78 50 78 Q78 78 78 120 Z" fill="none" stroke="#59CBE8" stroke-width=".4" opacity=".5"/><path d="M30 60 q5 -8 12 -6" fill="none" stroke="#59CBE8" stroke-width=".3" opacity=".4"/></svg>
+        </div>
+        <div class="scrim"></div>
+        <div class="meta">
+          <div class="code">A · 01 <span class="dot"></span> Resident</div>
+          <div class="name">David Castañeda</div>
+          <div class="style">Realism · Portrait</div>
+        </div>
+        <div class="bio">
+          <p>Founder. Hyperreal portraits and large-scale compositions. Fourteen years tattooing, three continents of guest spots.</p>
+          <a href="artists/david.html">See more</a>
+        </div>
+      </article>
+
+      <article class="artist">
+        <div class="portrait p2">
+          <svg class="portrait-svg" viewBox="0 0 100 120" preserveAspectRatio="xMidYMid slice"><circle cx="50" cy="42" r="20" fill="none" stroke="#59CBE8" stroke-width=".4" opacity=".5"/><path d="M22 120 Q22 78 50 78 Q78 78 78 120 Z" fill="none" stroke="#59CBE8" stroke-width=".4" opacity=".5"/></svg>
+        </div>
+        <div class="scrim"></div>
+        <div class="meta">
+          <div class="code">A · 02 <span class="dot"></span> Resident</div>
+          <div class="name">Breayan Marcano</div>
+          <div class="style">Neo-Traditional · Color</div>
+        </div>
+        <div class="bio">
+          <p>Saturated palettes, mythological subjects, bold outlines. Featured in Inked Quarterly. Booking eight weeks out.</p>
+          <a href="artists/breayan.html">See more</a>
+        </div>
+      </article>
+
+      <article class="artist">
+        <div class="portrait p3">
+          <svg class="portrait-svg" viewBox="0 0 100 120" preserveAspectRatio="xMidYMid slice"><circle cx="50" cy="42" r="20" fill="none" stroke="#59CBE8" stroke-width=".4" opacity=".5"/><path d="M22 120 Q22 78 50 78 Q78 78 78 120 Z" fill="none" stroke="#59CBE8" stroke-width=".4" opacity=".5"/></svg>
+        </div>
+        <div class="scrim"></div>
+        <div class="meta">
+          <div class="code">A · 03 <span class="dot"></span> Resident</div>
+          <div class="name">Alejandro Parra</div>
+          <div class="style">Fine Line · Botanical</div>
+        </div>
+        <div class="bio">
+          <p>Single-needle florals and architectural script. Trained in Madrid and Mexico City. Quiet, patient, exact.</p>
+          <a href="artists/alejandro.html">See more</a>
+        </div>
+      </article>
+
+      <article class="artist">
+        <div class="portrait p4">
+          <svg class="portrait-svg" viewBox="0 0 100 120" preserveAspectRatio="xMidYMid slice"><circle cx="50" cy="42" r="20" fill="none" stroke="#59CBE8" stroke-width=".4" opacity=".5"/><path d="M22 120 Q22 78 50 78 Q78 78 78 120 Z" fill="none" stroke="#59CBE8" stroke-width=".4" opacity=".5"/></svg>
+        </div>
+        <div class="scrim"></div>
+        <div class="meta">
+          <div class="code">A · 04 <span class="dot"></span> Resident</div>
+          <div class="name">Freddy Muzka</div>
+          <div class="style">Blackwork · Geometry</div>
+        </div>
+        <div class="bio">
+          <p>Sacred geometry, dotwork mandalas, full-sleeve compositions. Former architect. Open booking, long sessions only.</p>
+          <a href="artists/freddy.html">See more</a>
+        </div>
+      </article>
+
+      <article class="artist">
+        <div class="portrait p5">
+          <svg class="portrait-svg" viewBox="0 0 100 120" preserveAspectRatio="xMidYMid slice"><circle cx="50" cy="42" r="20" fill="none" stroke="#59CBE8" stroke-width=".4" opacity=".5"/><path d="M22 120 Q22 78 50 78 Q78 78 78 120 Z" fill="none" stroke="#59CBE8" stroke-width=".4" opacity=".5"/></svg>
+        </div>
+        <div class="scrim"></div>
+        <div class="meta">
+          <div class="code">A · 05 <span class="dot"></span> Resident</div>
+          <div class="name">Anthony</div>
+          <div class="style">Script · Lettering</div>
+        </div>
+        <div class="bio">
+          <p>Custom typography, single-line tattoos, ribbon work. Drafts every piece in ink before the needle ever sees you.</p>
+          <a href="artists/anthony.html">See more</a>
+        </div>
+      </article>
+
+      <article class="artist">
+        <div class="portrait p6">
+          <svg class="portrait-svg" viewBox="0 0 100 120" preserveAspectRatio="xMidYMid slice"><circle cx="50" cy="42" r="20" fill="none" stroke="#59CBE8" stroke-width=".4" opacity=".5"/><path d="M22 120 Q22 78 50 78 Q78 78 78 120 Z" fill="none" stroke="#59CBE8" stroke-width=".4" opacity=".5"/></svg>
+        </div>
+        <div class="scrim"></div>
+        <div class="meta">
+          <div class="code">A · 06 <span class="dot"></span> Resident</div>
+          <div class="name">Deacon</div>
+          <div class="style">Traditional · Bold</div>
+        </div>
+        <div class="bio">
+          <p>American Traditional, heavy line weights, classic palette. Twelve years on the East Coast circuit. Walk-in friendly.</p>
+          <a href="artists/deacon.html">See more</a>
+        </div>
+      </article>
+
+      <article class="artist">
+        <div class="portrait p7">
+          <svg class="portrait-svg" viewBox="0 0 100 120" preserveAspectRatio="xMidYMid slice"><circle cx="50" cy="42" r="20" fill="none" stroke="#59CBE8" stroke-width=".4" opacity=".5"/><path d="M22 120 Q22 78 50 78 Q78 78 78 120 Z" fill="none" stroke="#59CBE8" stroke-width=".4" opacity=".5"/></svg>
+        </div>
+        <div class="scrim"></div>
+        <div class="meta">
+          <div class="code">A · 07 <span class="dot"></span> Resident</div>
+          <div class="name">Mia Campbell</div>
+          <div class="style">Watercolor · Illustrative</div>
+        </div>
+        <div class="bio">
+          <p>Painterly washes, illustrative subjects, soft edges. Fine-art background, painter first. Booking by portfolio review.</p>
+          <a href="artists/mia.html">See more</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+<!-- TESTIMONIALS -->
+<section class="testi" id="testimonials">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="num">05</span>
+      <span class="label">What Clients Say</span>
+      <span class="rule"></span>
+    </div>
+    <h2 class="reveal">No marketing. <em>Just receipts.</em></h2>
+    <div class="testi-grid">
+      <article class="testi-card reveal d1">
+        <span class="qm" aria-hidden="true">“</span>
+        <div class="stars" aria-label="5 out of 5"><span></span><span></span><span></span><span></span><span></span></div>
+        <p class="quote">Breayan spent more time on the sketch than two other studios spent on the whole tattoo. The result reads like a photograph.</p>
+        <div class="who">
+          <div class="avatar">JR</div>
+          <div class="who-meta"><span class="who-name">Jordan R.</span><span class="who-role">Nashville · Sleeve</span></div>
+        </div>
+      </article>
+      <article class="testi-card reveal d2">
+        <span class="qm" aria-hidden="true">“</span>
+        <div class="stars" aria-label="5 out of 5"><span></span><span></span><span></span><span></span><span></span></div>
+        <p class="quote">Freddy turned a half-baked idea into a chest piece I'll carry for life. The man's a draftsman first, a tattooer second.</p>
+        <div class="who">
+          <div class="avatar">SK</div>
+          <div class="who-meta"><span class="who-name">Sarah K.</span><span class="who-role">Murfreesboro · Chest</span></div>
+        </div>
+      </article>
+      <article class="testi-card reveal d3">
+        <span class="qm" aria-hidden="true">“</span>
+        <div class="stars" aria-label="5 out of 5"><span></span><span></span><span></span><span></span><span></span></div>
+        <p class="quote">I flew in from Austin for David. Would do it again. The studio runs like a private clinic — quiet, clean, considered.</p>
+        <div class="who">
+          <div class="avatar">DM</div>
+          <div class="who-meta"><span class="who-name">Devin M.</span><span class="who-role">Austin TX · Forearm</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK CONTACT (discreet strip after Our Method) -->
+<section class="quick-contact" aria-label="Quick contact">
+  <div class="wrap">
+    <div class="qc-strip reveal">
+      <div class="qc-head">
+        <span class="qc-eyebrow">— Quick note</span>
+        <span class="qc-tag">Just a question? Drop us a line.</span>
+      </div>
+      <form class="qc-form" id="quick-form" novalidate>
+        <input type="text" name="qc-name" placeholder="Name" aria-label="Name" required />
+        <input type="email" name="qc-email" placeholder="Email" aria-label="Email" required />
+        <input type="text" name="qc-msg" placeholder="What can we help with?" aria-label="Message" required />
+        <button type="submit" aria-label="Send quick note">
+          Send
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </form>
+      <div class="qc-success" id="qc-success" role="status" aria-live="polite">Got it — we'll be in touch within one business day.</div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="map-section" aria-label="Studio location map">
+  <div class="map-wrap">
+    <iframe
+      src="https://www.openstreetmap.org/export/embed.html?bbox=-86.4150%2C35.8300%2C-86.3700%2C35.8600&amp;layer=mapnik&amp;marker=35.8456%2C-86.3903"
+      loading="lazy"
+      title="Aristocratic Ink — Studio location, Murfreesboro Tennessee">
+    </iframe>
+    <div class="map-overlay">
+      <div class="map-card reveal">
+        <span class="map-eyebrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-7.5-7-12a7 7 0 1 1 14 0c0 4.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Visit the studio
+        </span>
+        <h3>Aristocratic Ink</h3>
+        <p class="map-addr">117 E Main St<br/><span data-tweak="city">Murfreesboro</span>, TN 37130</p>
+        <p class="map-hours">Tue–Sat · By appointment only</p>
+        <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=117+E+Main+St+Murfreesboro+TN+37130" target="_blank" rel="noopener">
+          Get directions
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#studio" aria-label="Aristocratic Ink — home">
+          <img class="brand-logo" src="assets/logo-full.png" alt="Aristocratic Ink" />
+        </a>
+        <p>A private custom tattoo studio in <span data-tweak="city">Murfreesboro</span>, Tennessee. Open by appointment since <span data-tweak="year">2024</span>.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 4v8.2a3.2 3.2 0 1 1-2.6-3.14V11a1.2 1.2 0 1 0 1 1.2V4h2a3 3 0 0 0 3 3v2a5 5 0 0 1-3.4-1.34V4z"/></svg></a>
+          <a href="#" aria-label="Pinterest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M10 22l2-8"/><path d="M9 11a3 3 0 1 1 5 2c-1 2-3 2-3 4"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Studio</h4>
+        <ul>
+          <li><a href="#artists">Artists</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Visit</h4>
+        <ul>
+          <li>117 E Main St</li>
+          <li><span data-tweak="city">Murfreesboro</span>, TN 37130</li>
+          <li>(615) 930-9815</li>
+          <li>Tue–Sat, by appointment</li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="#contact">Book a consult</a></li>
+          <li><a href="mailto:hello@aristocratic.ink">hello@aristocratic.ink</a></li>
+          <li><a href="#">Newsletter</a></li>
+          <li><a href="#">Gift cards</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-strip">
+      <span class="copy">© 2026 Aristocratic Ink · All rights reserved</span>
+      <div class="legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Aftercare</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- LOCATION FAB (floating studio pin) -->
+<div class="loc-fab" id="loc-fab" aria-live="polite">
+  <button class="loc-pin" id="loc-pin" aria-label="Show studio location" aria-expanded="false" aria-controls="loc-pop">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M12 21s-7-7.5-7-12a7 7 0 1 1 14 0c0 4.5-7 12-7 12z"/>
+      <circle cx="12" cy="9" r="2.5"/>
+    </svg>
+  </button>
+  <div class="loc-pop" id="loc-pop" role="dialog" aria-label="Studio address">
+    <div class="loc-pop-head">
+      <span class="eyebrow">— The Studio</span>
+      <button class="loc-pop-close" id="loc-pop-close" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="loc-name">Aristocratic Ink</div>
+    <div class="loc-addr">117 E Main St<br/><span data-tweak="city">Murfreesboro</span>, TN 37130</div>
+    <div class="loc-hours">Tue–Sat · By appointment</div>
+    <a class="loc-link" href="https://www.google.com/maps/search/?api=1&amp;query=117+E+Main+St+Murfreesboro+TN+37130" target="_blank" rel="noopener">
+      Get directions
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</div>
+
+<script>
+(function(){
+  // ----- Nav scrolled state -----
+  const nav = document.getElementById('nav');
+  const onScroll = () => {
+    if (window.scrollY > 24) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+  };
+  document.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+
+  // ----- Mobile menu -----
+  const burger = document.getElementById('burger');
+  const menu = document.getElementById('menu');
+  const closeMenu = document.getElementById('close-menu');
+  const setMenu = (open) => {
+    menu.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+  };
+  burger.addEventListener('click', () => setMenu(true));
+  closeMenu.addEventListener('click', () => setMenu(false));
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+
+  // ----- Reveal on scroll -----
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        en.target.classList.add('in');
+        io.unobserve(en.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: .04 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // ----- Portfolio filters -----
+  const chips = document.querySelectorAll('.chip');
+  const tiles = document.querySelectorAll('.mosaic .tile');
+  chips.forEach(ch => ch.addEventListener('click', () => {
+    chips.forEach(c => c.setAttribute('aria-pressed','false'));
+    ch.setAttribute('aria-pressed','true');
+    const f = ch.dataset.filter;
+    tiles.forEach(t => {
+      const cat = t.dataset.cat;
+      const show = (f === 'all') || (cat === f);
+      t.classList.toggle('hidden', !show);
+    });
+  }));
+
+  // ----- Form -----
+  const form = document.getElementById('booking-form');
+  const success = document.getElementById('form-success');
+
+  // File input label updater
+  const fileInput = document.getElementById('f-reference');
+  const fileL1 = document.getElementById('f-reference-l1');
+  const fileL2 = document.getElementById('f-reference-l2');
+  if (fileInput && fileL1 && fileL2) {
+    fileInput.addEventListener('change', () => {
+      const f = fileInput.files && fileInput.files[0];
+      if (f) {
+        fileL1.textContent = 'Reference attached';
+        const kb = Math.max(1, Math.round(f.size/1024));
+        const size = kb > 1024 ? (kb/1024).toFixed(1) + ' MB' : kb + ' KB';
+        fileL2.textContent = f.name + ' · ' + size;
+      } else {
+        fileL1.textContent = 'Upload an image or PDF';
+        fileL2.textContent = 'JPG, PNG or PDF · up to 10 MB';
+      }
+    });
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    success.classList.add('show');
+    form.querySelectorAll('input, select, textarea, button.submit-btn').forEach(el => el.disabled = true);
+    const top = success.getBoundingClientRect().top + window.scrollY - 100;
+    window.scrollTo({ top, behavior:'smooth' });
+  });
+
+  // ----- Quick contact form -----
+  const qcForm = document.getElementById('quick-form');
+  if (qcForm) {
+    qcForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!qcForm.checkValidity()) { qcForm.reportValidity(); return; }
+      document.getElementById('qc-success').classList.add('show');
+      qcForm.querySelectorAll('input, button').forEach(el => el.disabled = true);
+    });
+  }
+
+  // ----- Location FAB popover -----
+  const locFab = document.getElementById('loc-fab');
+  if (locFab) {
+    const pin = document.getElementById('loc-pin');
+    const closeBtn = document.getElementById('loc-pop-close');
+    const setOpen = (open) => {
+      locFab.classList.toggle('open', open);
+      pin.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    pin.addEventListener('click', (e) => { e.stopPropagation(); setOpen(!locFab.classList.contains('open')); });
+    closeBtn.addEventListener('click', () => setOpen(false));
+    document.addEventListener('click', (e) => {
+      if (!locFab.contains(e.target)) setOpen(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    });
+  }
+
+  // ----- Smooth-scroll offset for fixed nav -----
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href').slice(1);
+      const target = id && document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      const top = target.getBoundingClientRect().top + window.scrollY - 70;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+})();
+</script>
+
+<!-- TWEAKS PANEL -->
+<aside class="tweaks-panel" id="tweaks-panel" role="dialog" aria-label="Tweaks">
+  <div class="tp-head">
+    <span class="tp-title">Tweaks</span>
+    <button class="tp-close" id="tp-close" aria-label="Close tweaks">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="tp-body">
+    <div class="tp-field">
+      <label for="tw-city">City</label>
+      <input id="tw-city" type="text" autocomplete="off" />
+    </div>
+    <div class="tp-field">
+      <label for="tw-year">Established (year)</label>
+      <input id="tw-year" type="text" autocomplete="off" />
+    </div>
+  </div>
+  <div class="tp-hint">Updates live across the page.</div>
+</aside>
+
+<script>
+(function(){
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "city": "Murfreesboro",
+    "year": "2024"
+  }/*EDITMODE-END*/;
+
+  const state = { ...TWEAK_DEFAULTS };
+  const panel = document.getElementById('tweaks-panel');
+  const closeBtn = document.getElementById('tp-close');
+  const cityInput = document.getElementById('tw-city');
+  const yearInput = document.getElementById('tw-year');
+
+  function applyKey(key, value){
+    document.querySelectorAll('[data-tweak="' + key + '"]').forEach(el => {
+      el.textContent = value;
+    });
+    state[key] = value;
+  }
+
+  function applyAll(){
+    applyKey('city', state.city);
+    applyKey('year', state.year);
+    cityInput.value = state.city;
+    yearInput.value = state.year;
+  }
+
+  function setKey(key, value){
+    applyKey(key, value);
+    try {
+      window.parent.postMessage({
+        type: '__edit_mode_set_keys',
+        edits: { [key]: value }
+      }, '*');
+    } catch (e) {}
+  }
+
+  cityInput.addEventListener('input', () => setKey('city', cityInput.value));
+  yearInput.addEventListener('input', () => setKey('year', yearInput.value));
+
+  // Listen for activate/deactivate from host
+  window.addEventListener('message', (e) => {
+    const data = e.data || {};
+    if (data.type === '__activate_edit_mode') {
+      applyAll();
+      panel.classList.add('open');
+    } else if (data.type === '__deactivate_edit_mode') {
+      panel.classList.remove('open');
+    }
+  });
+
+  closeBtn.addEventListener('click', () => {
+    panel.classList.remove('open');
+    try { window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*'); } catch (e) {}
+  });
+
+  // Apply defaults immediately so the page reflects current values
+  applyAll();
+
+  // Announce availability so the toolbar shows the Tweaks toggle
+  try { window.parent.postMessage({ type: '__edit_mode_available' }, '*'); } catch (e) {}
+})();
+</script>
+
+</body>
+</html>
